@@ -1,24 +1,28 @@
 ﻿
-// Aula 35
-// lista de fibonacci
 
-var listaFib = new List<int> { 1, 1 };
-//Console.WriteLine(listaFib.Count);
+using LinguagemCsharp;
 
-for(int i = 0; i < 10; i++)
+ContaBanco contaB = new ContaBanco("Pâmela", 10000);
+Console.WriteLine($"A conta {contaB.Numero} de {contaB.Titular} foi criada com saldo de {contaB.Saldo}");
+
+contaB.Depositar(800, DateTime.Now, "Recebi um pgto");
+Console.WriteLine($"A conta {contaB.Numero} de {contaB.Titular} está com saldo de {contaB.Saldo}");
+
+try
 {
-    var inicio1 = listaFib[listaFib.Count - 1];
-    var inicio2 = listaFib[listaFib.Count - 2];
-
-    var soma = inicio1 + inicio2;
-
-    listaFib.Add(soma);
+    contaB.Sacar(10000, DateTime.Now, "Fiz um pgto");
+    Console.WriteLine($"A conta {contaB.Numero} de {contaB.Titular} está com saldo de {contaB.Saldo}");
+}
+catch (ArgumentOutOfRangeException ex)
+{
+    Console.WriteLine(ex.Message );
+}
+catch (Exception ex)
+{
+    Console.WriteLine($"Operação não realizada");
 }
 
-foreach (var e in listaFib)
-{
-    Console.WriteLine(e);
-}
+Console.WriteLine(contaB.PegarMovimentacoes());
 
 
 
