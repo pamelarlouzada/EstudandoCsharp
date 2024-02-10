@@ -1,25 +1,24 @@
 ﻿
-// Aula 33
-// list
+// Aula 35
+// lista de fibonacci
 
+var listaFib = new List<int> { 1, 1 };
+//Console.WriteLine(listaFib.Count);
 
-var nomes = new List<string> { "<nome>", "Ana", "Felipe", "Bia", "Camila" , "Amanda", "Davi"};
-nomes.Add("Maria");
-nomes.Remove("Ana");
-nomes.RemoveAt(0);
-
-nomes.Sort();
-foreach (var nome in nomes)
+for(int i = 0; i < 10; i++)
 {
-    Console.WriteLine(nome);
+    var inicio1 = listaFib[listaFib.Count - 1];
+    var inicio2 = listaFib[listaFib.Count - 2];
+
+    var soma = inicio1 + inicio2;
+
+    listaFib.Add(soma);
 }
 
-var index = nomes.IndexOf("Felipe");
-Console.WriteLine($"O index do Felipe é {index}");
-
-var index2 = nomes.IndexOf("Alberto");
-Console.WriteLine($"O index do Alberto é {index2}. Isso indica que não tem Alberto na lista");
-
+foreach (var e in listaFib)
+{
+    Console.WriteLine(e);
+}
 
 
 
