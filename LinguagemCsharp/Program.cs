@@ -1,44 +1,27 @@
 ﻿
-// Aula 21
-// - Retornos e parâmetros
-// - Nível de acessibilidade (public/private..)
-// - Sobrecarga de método
-// - Override
+// Aula 25
+// Manioulando strings
 
-Carro carro1 = new Carro("Carro 1");
-Carro carro2 = new Carro("Carro 2");
-Carro carro3 = new Carro("Carro 1");
+string saudacao = "          Olá mundo        ";
+Console.WriteLine($"[{saudacao}]");
 
-Console.WriteLine(carro1);
-Console.WriteLine(carro2);
-Console.WriteLine(carro3.DigaSeuNome("Carro 3"));
-class Carro
-{
-    private string nome;
-    //atalho para fazer um construtor: ctor
-    public Carro()
-    {
-    }
-    public Carro(string Nome)
-    {
-        nome = Nome;
-    }
-    public string DigaSeuNome()
-    {
-        return nome;
-    }
-    public string DigaSeuNome(string Nome)
-    {
-        return Nome;
-    }
+string ApararSaudacao = saudacao.Trim(); // TrimStart() e TrimEnd()
+Console.WriteLine($"Função Trim(): [{ApararSaudacao}]");
 
-    public DateTime DigaDataNascimento()
-    {
-        return DateTime.Now;
-    }
+Console.WriteLine($"Função Replace(): [{ApararSaudacao.Replace("Olá", "Oi")}]");
+Console.WriteLine($"Função ToUpper(): [{ApararSaudacao.ToUpper()}]");
+Console.WriteLine($"Função ToLower(): [{ApararSaudacao.ToLower()}]");
+Console.WriteLine($"Função Length: [{ApararSaudacao.Length}]");
+Console.WriteLine($"Função Contains(): [{ApararSaudacao.Contains("Olá")}]");
+Console.WriteLine($"Função StartsWith(): [{ApararSaudacao.StartsWith("Olá")}]");
+Console.WriteLine($"Função EndsWith(): [{ApararSaudacao.EndsWith("mundo")}]");
+Console.WriteLine($"Função IndexOf(): [{ApararSaudacao.IndexOf("mundo")}]");
 
-    public override string ToString()
-    {
-        return string.Format("Eu sou o carro {0} e nasci em {1}", this.nome, this.DigaDataNascimento() );
-    }
-}
+
+//string primeiroAmigo = "João";
+//string segundoAmigo = "Maria";
+
+//Console.WriteLine($"meus amigos são {primeiroAmigo} e {segundoAmigo}");
+
+//Console.WriteLine($"O nome {primeiroAmigo} tem {primeiroAmigo.Length} letras");
+
