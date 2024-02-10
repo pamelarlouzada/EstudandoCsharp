@@ -1,17 +1,24 @@
 ﻿
-// Aula 27
-// Números e Inteiros
+// Aula 33
+// list
 
-int a = 10;
-int b = 6;
-Console.WriteLine("A divisão de interios resulta em um número inteiro. Ex: 10/6 = " + a /b);
-Console.WriteLine("Para saber o resto da divisão, usa-se %. Ex: 10 % 6 = " + a % b);
 
-double c = 10;
-double d = 6;
-Console.WriteLine($"Tipo double 10/6 = {c/d}. Em espaço, é maior que o decimal (MaxValue e MinValue)");
+var nomes = new List<string> { "<nome>", "Ana", "Felipe", "Bia", "Camila" , "Amanda", "Davi"};
+nomes.Add("Maria");
+nomes.Remove("Ana");
+nomes.RemoveAt(0);
 
-Console.WriteLine($"Tipo long é usado para representar números inteiros longos. Caso vc utilise o int para números muito longos, ele passará a contabilizar negativamente");
+nomes.Sort();
+foreach (var nome in nomes)
+{
+    Console.WriteLine(nome);
+}
+
+var index = nomes.IndexOf("Felipe");
+Console.WriteLine($"O index do Felipe é {index}");
+
+var index2 = nomes.IndexOf("Alberto");
+Console.WriteLine($"O index do Alberto é {index2}. Isso indica que não tem Alberto na lista");
 
 
 
