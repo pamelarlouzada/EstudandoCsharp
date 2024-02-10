@@ -1,27 +1,19 @@
 ﻿
-// Aula 25
-// Manioulando strings
+// Aula 27
+// Números e Inteiros
 
-string saudacao = "          Olá mundo        ";
-Console.WriteLine($"[{saudacao}]");
+int a = 10;
+int b = 6;
+Console.WriteLine("A divisão de interios resulta em um número inteiro. Ex: 10/6 = " + a /b);
+Console.WriteLine("Para saber o resto da divisão, usa-se %. Ex: 10 % 6 = " + a % b);
 
-string ApararSaudacao = saudacao.Trim(); // TrimStart() e TrimEnd()
-Console.WriteLine($"Função Trim(): [{ApararSaudacao}]");
+double c = 10;
+double d = 6;
+Console.WriteLine($"Tipo double 10/6 = {c/d}. Em espaço, é maior que o decimal (MaxValue e MinValue)");
 
-Console.WriteLine($"Função Replace(): [{ApararSaudacao.Replace("Olá", "Oi")}]");
-Console.WriteLine($"Função ToUpper(): [{ApararSaudacao.ToUpper()}]");
-Console.WriteLine($"Função ToLower(): [{ApararSaudacao.ToLower()}]");
-Console.WriteLine($"Função Length: [{ApararSaudacao.Length}]");
-Console.WriteLine($"Função Contains(): [{ApararSaudacao.Contains("Olá")}]");
-Console.WriteLine($"Função StartsWith(): [{ApararSaudacao.StartsWith("Olá")}]");
-Console.WriteLine($"Função EndsWith(): [{ApararSaudacao.EndsWith("mundo")}]");
-Console.WriteLine($"Função IndexOf(): [{ApararSaudacao.IndexOf("mundo")}]");
+Console.WriteLine($"Tipo long é usado para representar números inteiros longos. Caso vc utilise o int para números muito longos, ele passará a contabilizar negativamente");
 
 
-//string primeiroAmigo = "João";
-//string segundoAmigo = "Maria";
 
-//Console.WriteLine($"meus amigos são {primeiroAmigo} e {segundoAmigo}");
 
-//Console.WriteLine($"O nome {primeiroAmigo} tem {primeiroAmigo.Length} letras");
 
