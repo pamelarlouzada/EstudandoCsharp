@@ -1,82 +1,77 @@
-﻿
-using System.Drawing;
+﻿using System;
+using System.IO;
+using System.Threading;
+using Aspose.Imaging.FileFormats.Jpeg;
+using Aspose.Imaging.ImageOptions;
 
-Console.WriteLine("Iniciando redimensionador");
-Thread thread = new Thread(Redimensionar);
-thread.Start();
-
-
-static void Redimensionar()
+class Program
 {
-    #region "Diretórios"
-    string diretorioEntrada = "Arquivos_Entradas";
-    string diretorioFinalizado = "Arquivos_Finalizados";
-    string diretorioRedimensionado = "Arquivos_Redimensionados";
-
-    if (!Directory.Exists(diretorioEntrada))
+    static void Main(string[] args)
     {
-        Directory.CreateDirectory(diretorioEntrada);
+        Console.WriteLine("Iniciando redimensionador e compactador de imagens");
+        Thread thread = new Thread(RedimensionarECompactar);
+        thread.Start();
+
+        Console.ReadLine(); // Mantém a aplicação em execução para o propósito deste exemplo.
     }
-    if (!Directory.Exists(diretorioFinalizado))
-    {
-        Directory.CreateDirectory(diretorioFinalizado);
-    }
-    if (!Directory.Exists(diretorioRedimensionado))
-    {
-        Directory.CreateDirectory(diretorioRedimensionado);
-    }
-    #endregion
 
-    FileStream fileStream;
-    FileInfo fileInfo;
-    while (true)
+    static void RedimensionarECompactar()
     {
-        // meu programa vai olhar para pasta de entrada
-        // se tiver arquivo, ele irá redimensionar
-        var arquivosEntrada = Directory.EnumerateFiles(diretorioEntrada);
+        string diretorioEntrada = "Arquivos_Entradas";
+        string diretorioFinalizado = "Arquivos_Finalizados";
+        string diretorioRedimensionado = "Arquivos_Redimensionados";
 
-        // ler o tamanho que irá redimensionar
-        int novaAltura = 200;
+        if (!Directory.Exists(diretorioEntrada))
+            Directory.CreateDirectory(diretorioEntrada);
+        if (!Directory.Exists(diretorioFinalizado))
+            Directory.CreateDirectory(diretorioFinalizado);
+        if (!Directory.Exists(diretorioRedimensionado))
+            Directory.CreateDirectory(diretorioRedimensionado);
 
-        foreach (var arquivo in arquivosEntrada)
+        while (true)
         {
-            fileStream = new FileStream(arquivo, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite);
-            fileInfo = new FileInfo(arquivo);
+            var arquivosEntrada = Directory.EnumerateFiles(diretorioEntrada);
 
-            string caminho = Environment.CurrentDirectory + @"\" + diretorioRedimensionado + @"\" +
-                            DateTime.Now.Millisecond.ToString() + "_" + fileInfo.Name ;
+            foreach (var arquivo in arquivosEntrada)
+            {
+                try
+                {
+                    // Redimensionar e compactar a imagem
+                    RedimensionarECompactarImagem(arquivo, diretorioRedimensionado, diretorioFinalizado);
 
-            //Console.WriteLine(file);
+                    // Mover o arquivo de entrada para o diretório de arquivos finalizados
+                    string caminhoFinalizado = Path.Combine(diretorioFinalizado, Path.GetFileName(arquivo));
+                    File.Move(arquivo, caminhoFinalizado);
 
-            // Redimensiona
-            Redimensionador(Image.FromStream(fileStream), novaAltura, caminho);
-            fileStream.Close();
+                    Console.WriteLine($"Redimensionamento e compactação concluídos para {Path.GetFileName(arquivo)}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Erro ao processar arquivo {arquivo}: {ex.Message}");
+                }
+            }
 
-            string caminhoFinalizado = Environment.CurrentDirectory + @"\" + diretorioFinalizado 
-                + @"\" + fileInfo.Name;
-
-            // move arquivos de entrada para finalizados
-            fileInfo.MoveTo(caminhoFinalizado);
+            Thread.Sleep(TimeSpan.FromSeconds(2)); // Aguarda 2 segundos antes de verificar novamente
         }
-
-        Thread.Sleep(new TimeSpan(0, 0, 2));
     }
 
-    static void Redimensionador(Image imagem, int altura, string caminho)
+    static void RedimensionarECompactarImagem(string caminhoImagem, string diretorioRedimensionado, string diretorioFinalizado)
     {
-        double ratio = (double)altura/imagem.Height;
-        int novaLargura = (int)(imagem.Width * ratio);
-        int novaAltura = (int)(imagem.Height * ratio);
-
-        Bitmap novaImagem = new Bitmap(novaLargura, novaAltura);
-        using(Graphics g = Graphics.FromImage(novaImagem))
+        // Carregar a imagem original a ser compactada
+        using (var originalImagem = Aspose.Imaging.Image.Load(caminhoImagem))
         {
-            g.DrawImage(imagem, 0, 0, novaLargura, novaAltura);
+            // Criar as opções de imagem para compactação
+            var opcoesImagem = new JpegOptions()
+            {
+                CompressionType = JpegCompressionMode.Progressive, // Usar compressão progressiva
+                Quality = 30 // Ajustar a qualidade da imagem (0 a 100)
+            };
+
+            // Caminho para o arquivo redimensionado e compactado
+            string caminhoRedimensionado = Path.Combine(diretorioRedimensionado, Path.GetFileName(caminhoImagem));
+
+            // Salvar a imagem redimensionada e compactada no disco
+            originalImagem.Save(caminhoRedimensionado, opcoesImagem);
         }
-        novaImagem.Save(caminho);
-        imagem.Dispose();
-    } 
+    }
 }
-
-
-

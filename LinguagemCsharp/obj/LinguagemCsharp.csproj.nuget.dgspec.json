@@ -40,6 +40,18 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Aspose.Imaging": {
+              "target": "Package",
+              "version": "[24.2.0, )"
+            },
+            "SixLabors.ImageSharp": {
+              "target": "Package",
+              "version": "[3.1.2, )"
+            },
+            "SixLabors.ImageSharp.Drawing": {
+              "target": "Package",
+              "version": "[2.1.1, )"
+            },
             "System.Drawing.Common": {
               "target": "Package",
               "version": "[8.0.1, )"
