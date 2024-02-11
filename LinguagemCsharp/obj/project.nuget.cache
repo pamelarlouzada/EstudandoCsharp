@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "q3IJzQOhuFbajYuZpPtBZklzbNtJpeX8I+hPoFbKFTeoIV6PawUURvlD4mvlHBN+PQH+JHgsdrzGQZct5bH9Gw==",
+  "dgSpecHash": "JzwB5hqVw79l+9cQ6kn6yQaarh9SXrun11dndyDrsCPGKv9j0MNWAGKffMe0sFNqn9pMQEwlixLumACvGz2NgQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\pamel\\Documents\\_Estudos\\ASP.NET - DIOGO COSTA\\LinguagemCsharp\\LinguagemCsharp\\LinguagemCsharp.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\pamel\\.nuget\\packages\\microsoft.win32.systemevents\\8.0.0\\microsoft.win32.systemevents.8.0.0.nupkg.sha512",
+    "C:\\Users\\pamel\\.nuget\\packages\\system.drawing.common\\8.0.1\\system.drawing.common.8.0.1.nupkg.sha512"
+  ],
   "logs": []
 }
