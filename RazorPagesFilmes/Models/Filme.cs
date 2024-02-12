@@ -14,5 +14,7 @@ namespace RazorPagesFilmes.Models
         public string Genero { get; set; } = string.Empty;
         [Display(Name = "Preço")]
         public decimal Preco { get; set; }
+        [Display(Name = "Avaliação")]
+        public int Avaliacao { get; set; } = 0;
     }
 }
